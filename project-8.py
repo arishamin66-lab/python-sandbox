@@ -4,13 +4,23 @@ inp = 0
 
 while inp != 6:
     print("\n--- Contact Book ---")
-    inp = int(input("""1. Add contact
+    raw_choice = input("""1. Add contact
 2. Search contact
 3. Update contact
 4. Delete contact
 5. Display all contacts
 6. Exit
-Select an option: """))
+Select an option: """)
+
+    # BUG FIX: the original code did `int(input(...))` directly, which
+    # crashes with a ValueError if the user types anything that isn't a
+    # whole number (e.g. blank input, letters). Parsing it separately and
+    # validating first lets us show a friendly message instead of crashing.
+    if not raw_choice.strip().isdigit():
+        print("Please enter a number between 1 and 6.")
+        continue
+
+    inp = int(raw_choice)
 
     if inp == 1:
         name = input("Enter name: ").strip()
@@ -63,3 +73,9 @@ Select an option: """))
 
     elif inp == 6:
         print("Exiting Contact Book. Goodbye!")
+
+    else:
+        # IMPROVEMENT: the original code had no handling for a valid
+        # number outside 1-6 (e.g. entering 9), so it would silently do
+        # nothing and just loop back to the menu with no feedback.
+        print("Invalid option, please choose a number between 1 and 6.")

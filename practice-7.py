@@ -1,12 +1,15 @@
 def print_hello_world():
+    # Simple function with no return value, just prints a greeting
     print("Hello, World!")
 
 
 def greet_person(name):
+    # Greets a specific person by name
     print(f"Hello, {name}!")
 
 
 def sum_two_numbers(a, b):
+    # Returns the sum of two numbers
     return a + b
 
 
@@ -23,6 +26,7 @@ def multiply(a, b):
 
 
 def divide(a, b):
+    # Guard against division by zero
     if b == 0:
         return "Division by zero is not allowed"
     return a / b
@@ -69,11 +73,13 @@ def count_even_numbers(numbers):
 
 
 def is_palindrome(text):
+    # Compare the lowercased text to its reverse
     cleaned_text = text.lower()
     return cleaned_text == cleaned_text[::-1]
 
 
 def get_top_student(students):
+    # students is a dict of {name: score}; find the name with the highest score
     if not students:
         return None
     top_student = None
@@ -86,6 +92,8 @@ def get_top_student(students):
 
 
 def get_unique_values(items):
+    # Builds a new list keeping only the first occurrence of each item
+    # (safe because it never mutates the list being iterated over)
     unique_items = []
     for item in items:
         if item not in unique_items:
